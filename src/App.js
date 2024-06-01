@@ -3,7 +3,7 @@ import "./App.css";
 function App() {
   return (
     <>
-      <h1 className="">React DnD</h1>
+      <h1 className="text-xl">React DnD</h1>
     </>
   );
 }
