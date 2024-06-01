@@ -1,7 +1,26 @@
 import React from "react";
 
+import { useDrag } from "react-dnd";
+
 const Note = ({ note }) => {
-  return <div>Note</div>;
+  const [{ isDragging }, drag] = useDrag(
+    () => ({
+      type: "note",
+      item: { name: note },
+      end: (item, monitor) => {
+        const dropResult = monitor.getDropResult();
+        if (item && dropResult) {
+          alert(`You threw ${item.name} Into ${dropResult.name}`);
+        }
+      },
+      collect: (monitor) => ({
+        isDragging: !!monitor.isDragging(),
+      }),
+    }),
+    []
+  );
+
+  return <div ref={drag}>{note}</div>;
 };
 
 export default Note;
