@@ -2,7 +2,7 @@ import React from "react";
 
 import { useDrag } from "react-dnd";
 
-const Note = ({ note }) => {
+const Note = ({ note, binnedItems }) => {
   const [{ isDragging }, drag] = useDrag(
     () => ({
       type: "note",
@@ -11,6 +11,10 @@ const Note = ({ note }) => {
         const dropResult = monitor.getDropResult();
         if (item && dropResult) {
           alert(`You threw ${item.name} Into ${dropResult.name}`);
+          let tempList = binnedItems;
+          tempList.push(item.name);
+          localStorage.setItem("binnedItems", JSON.stringify(tempList));
+          window.location.reload();
         }
       },
       collect: (monitor) => ({
